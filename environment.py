@@ -65,6 +65,7 @@ class BaseEnv:
         mujoco.mj_step(self.model, self.data, nstep=2000)
         self._t = 0
 
+
     def _create_scene(self):
         return create_tabletop_scene()
 

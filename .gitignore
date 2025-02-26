@@ -1,4 +1,5 @@
 mujoco_menagerie/
-__pycache__/
+./__pycache__/
 *.pyc
 runs/
+checkpoints/

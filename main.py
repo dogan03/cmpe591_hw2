@@ -9,7 +9,7 @@ writer = SummaryWriter()
 N_ACTIONS = 8
 agent = DQNAgent(state_shape=(3, 128, 128), n_actions=N_ACTIONS)
 env = Hw2Env(n_actions=N_ACTIONS, render_mode="offscreen")
-N_EPISODES = 100
+N_EPISODES = 100000
 for episode in range(N_EPISODES):
     env.reset()
     done = False
@@ -28,6 +28,8 @@ for episode in range(N_EPISODES):
         state = next_state
         total_reward += reward
         episode_steps += 1
+
+        agent.steps += 1
         if loss is not None:
             episode_loss += loss
 

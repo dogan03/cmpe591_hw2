@@ -47,16 +47,17 @@ class DQNAgent:
         self.target_net = DQN(state_shape, n_actions).to(device)
         self.target_net.load_state_dict(self.policy_net.state_dict())
         
-        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=0.00025)
-        self.memory = deque(maxlen=100000)
+        self.optimizer = optim.Adam(self.policy_net.parameters(), lr=2.5e-4)
+        self.memory = deque(maxlen=10_000)
         
         self.batch_size = 32
         self.gamma = 0.99
         self.epsilon = 1.0
-        self.epsilon_min = 0.01
-        self.epsilon_decay = 0.995
+        self.epsilon_min = 0.1
+        self.epsilon_decay = 0.9999
         self.target_update = 1000
         self.steps = 0
+        self.replay_freq = 4
         
     def remember(self, state, action, reward, next_state, done):
         self.memory.append((state, action, reward, next_state, done))
@@ -71,7 +72,7 @@ class DQNAgent:
             return q_values.argmax().item()
     
     def replay(self):
-        if len(self.memory) < self.batch_size:
+        if len(self.memory) < self.batch_size or self.steps % self.replay_freq != 0:
             return
         
         
@@ -101,4 +102,4 @@ class DQNAgent:
         if self.steps % self.target_update == 0:
             self.target_net.load_state_dict(self.policy_net.state_dict())
             
-        return loss.item()
+        return loss.item()        return loss.item()

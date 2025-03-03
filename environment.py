@@ -1,13 +1,12 @@
 import collections
 from copy import deepcopy
 
-import numpy as np
-from dm_control import mjcf
 import mujoco
 import mujoco_viewer
+import numpy as np
+from dm_control import mjcf
 from scipy.spatial.transform import Rotation as R
 from scipy.spatial.transform import Slerp
-
 
 IKResult = collections.namedtuple(
     'IKResult', ['qpos', 'err_norm', 'steps', 'success'])
@@ -58,6 +57,7 @@ class BaseEnv:
             self.viewer._run_speed = 2
         elif self._render_mode == "offscreen":
             self.viewer = mujoco.Renderer(self.model, 128, 128)
+        
 
         self.data.ctrl[:] = self._init_position
         mujoco.mj_step(self.model, self.data, nstep=2000)

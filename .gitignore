@@ -3,3 +3,5 @@ mujoco_menagerie/
 *.pyc
 runs/
 checkpoints/
+models/
+submission.txt

@@ -241,12 +241,15 @@ def train_agent(num_episodes=2000, max_steps=200, render_mode="offscreen", check
             score = 0
             episode_steps = 0
             success = False
+            cumulative_raw_reward = 0
             
              
             for step in range(max_steps):
                  
                 action = agent.get_action(state, epsilon)
                 next_state_raw, reward_env, is_terminal, is_truncated = env.step(action.item())
+
+                cumulative_raw_reward += reward_env
                 
                  
                 next_state = env.high_level_state()
@@ -308,13 +311,15 @@ def train_agent(num_episodes=2000, max_steps=200, render_mode="offscreen", check
             
              
             print(f"Episode {episode+1}/{num_episodes}, Score: {score:.2f}, Avg(100): {avg_score:.2f}, Steps: {episode_steps}, Epsilon: {epsilon:.3f}")
-            
+            print("RPS: {:.2f}, Reward: {:.2f}".format(cumulative_raw_reward / episode_steps, cumulative_raw_reward))
              
             writer.add_scalar("Training/Score", score, episode)
             writer.add_scalar("Training/AvgScore", avg_score, episode)
             writer.add_scalar("Training/Steps", episode_steps, episode)
             writer.add_scalar("Training/Epsilon", epsilon, episode)
             writer.add_scalar("Training/Success", float(success), episode)
+            writer.add_scalar("Training/RPS", cumulative_raw_reward / episode_steps, episode)
+            writer.add_scalar("Training/Reward", cumulative_raw_reward, episode)
             
              
             if (episode + 1) % 1000 == 0:
@@ -411,7 +416,7 @@ if __name__ == "__main__":
     print("Device:", device)
     
      
-    checkpoint_path = "models/dqn_checkpoint_ep5000_2.pth"
+    checkpoint_path = None
     if len(sys.argv) > 1:
         checkpoint_path = sys.argv[1]
         print(f"Will resume training from checkpoint: {checkpoint_path}")
@@ -427,7 +432,7 @@ if __name__ == "__main__":
      
     agent, scores = train_agent(
         num_episodes=1000000,   
-        max_steps=300,       
+        max_steps=50,       
         render_mode="offscreen", 
         checkpoint_path=checkpoint_path
     )

@@ -11,7 +11,6 @@ from homework2 import Hw2Env
 from model import *
 from train import calculate_reward, enhance_state, preprocess_state
 
- 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 class FrameCaptureEnv:
@@ -149,7 +148,7 @@ def test_agent(model_path, num_episodes=5, max_steps=300, save_dir='results'):
     
      
     N_ACTIONS = 8
-    base_env = Hw2Env(n_actions=N_ACTIONS, render_mode="offscreen")
+    base_env = Hw2Env(n_actions=N_ACTIONS, render_mode="gui")
     env = FrameCaptureEnv(base_env)   
     
      
@@ -305,7 +304,7 @@ if __name__ == "__main__":
     
      
     parser = argparse.ArgumentParser(description='Test DQN agent with GIF output')
-    parser.add_argument('--model', type=str, default="hw2_model.pth", 
+    parser.add_argument('--model', type=str, default="hw_2_model.pth", 
                         help='Path to the model checkpoint')
     parser.add_argument('--episodes', type=int, default=5,
                         help='Number of episodes to test')

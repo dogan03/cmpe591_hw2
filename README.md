@@ -1,25 +1,21 @@
-# cmpe591_hw2
+# CMPE591 Homework 2
 
-homework2 for cmpe591
+Examples of Agent Behavior
 
-Since I played with the reward function, the plot is a bit different. But you can still see the model improvement.
+<table> <tr> <td align="center"><b>Episode 1</b></td> <td align="center"><b>Episode 2</b></td> <td align="center"><b>Episode 3</b></td> <td align="center"><b>Episode 4</b></td> <td align="center"><b>Episode 5</b></td> </tr> <tr> <td><img src="episode_1.gif" alt="Episode 1" width="160"/></td> <td><img src="episode_2.gif" alt="Episode 2" width="160"/></td> <td><img src="episode_3.gif" alt="Episode 3" width="160"/></td> <td><img src="episode_4.gif" alt="Episode 4" width="160"/></td> <td><img src="episode_5.gif" alt="Episode 5" width="160"/></td> </tr> </table>
+Training Analytics
+Reward Progression
+The plot below shows how total rewards evolved during training:
 
-### Example 1:
+<p align="center"> <img src="reward_plot.png" alt="Reward Plot" width="800"/> </p>
+Reward Per Step Analysis
+This plot shows the efficiency of the agent in collecting rewards over time:
 
-![Example 1](example_1.gif)
+<p align="center"> <img src="reward_per_step_analysis.png" alt="Reward Per Step Analysis" width="800"/> </p>
+Epsilon Decay
+The exploration parameter (epsilon) decreased from 1.0 to 0.05 during training:
 
-### Example 2:
-
-![Example 2](example_2.gif)
-
-### Score and Average Score Plot:
-
-![Score](score_plot.png)
-
-### Success Rate (If trained more, would converge to 100% probably, I accidentally stopped the training early.)
-
-![Success](success_rate.png)
-
-### Epsilon Plot:
-
-![Epsilon](epsilon_decay_plot.png)
+<p align="center"> <img src="epsilon_decay_plot.png" alt="Epsilon Decay" width="800"/> </p>
+Success Rate
+Succcess rate per 100 episodes through training.
+<p align="center"> <img src="success_rate.png" alt="Epsilon Decay" width="800"/> </p>
